@@ -2,8 +2,7 @@ module Instance_utils
 
 export check_status, get_log!, call!, update_logs!
 
-include("../instance/monitoring.jl")
-
+using Instance.Monitoring
 using Master.Types
 
 function check_status(instance::Instance_info)
@@ -28,11 +27,20 @@ function check_status(instance::Instance_info)
     println(infostr)
 end
 
+function update_logs(log_pos, file)
+    text = join(readlines(seek(open(file), log_pos)), "")
+    return (text, log_pos + length(text))
+end
+
 function get_log!(call::Call_info)::Call_info
-    (text, state) = remotecall_fetch(
-            update_logs, # function
-            call.process_id, # process
-            call.log_pos, string("logs", call.task.id, ".txt")) # args
+    # (text, state) = remotecall_fetch(
+    #         update_logs, # function
+    #         call.process_id, # process
+    #         call.log_pos, string("logs", call.task.id, ".txt")) # args
+    file = string("logs", call.task.id, ".txt")
+    text = readstring((`sshpass -p 5fHjkm ssh user@10.128.32.52
+                        "cat ~/julia_temp/$(file)"`))
+    state = length(text)
     call.log_pos = state
     write(call.log_file, text)
     flush(call.log_file)
@@ -52,7 +60,8 @@ function call!(calls::Array{Call_info,1},
     end
     command = `$args`
     moment = now()
-    process = remotecall_fetch(run_task, instance.process_id, command)
+    # process = remotecall_fetch(run_task, instance.process_id, command)
+    process = remotecall_fetch(spawn, instance.process_id, command)
     call = Call_info(true,
                      instance.process_id,
                      task,

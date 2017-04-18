@@ -32,6 +32,7 @@ function read_instance_list(
     instances = Array{Instance_info,1}()
     try
         table = readtable(file)
+        run(`clear`)
         for i in 1:length(table[1]) # for each entry in the table
             println("Enter password for $(table[1][i]):")
             password = chomp(readline())

@@ -1,6 +1,6 @@
 module Monitoring
 
-export get_gpu_state, update_logs, add_logging_to_pyfile, run_task
+export get_gpu_state, add_logging_to_pyfile, run_task
 
 function get_gpu_state(gpu_id::Integer)
     i = 0
