@@ -38,7 +38,8 @@ function get_log!(call::Call_info)::Call_info
     #         call.process_id, # process
     #         call.log_pos, string("logs", call.task.id, ".txt")) # args
     file = string("logs", call.task.id, ".txt")
-    text = readstring((`sshpass -p 5fHjkm ssh user@10.128.32.52
+    inst = call.instance
+    text = readstring((`sshpass -p $(inst.password) ssh $(inst.userhost)
                         "cat ~/julia_temp/$(file)"`))
     state = length(text)
     call.log_pos = state

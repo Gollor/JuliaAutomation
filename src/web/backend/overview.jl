@@ -31,6 +31,9 @@ function construct_html_table_with_head(list, head, fields)::AbstractString
             elseif field == :task
                 instance = getfield(list[i], field)
                 text *= "<td>$(getfield(instance, :id))</td>"
+            elseif typeof(getfield(list[i], field)) == :DateTime
+                str = format(getfield(list[i], field), "y-m-dTH:M:S.s")
+                text *= "<td>$(str)</td>"
             else
                 text *= "<td>$(getfield(list[i], field))</td>"
             end
@@ -57,7 +60,7 @@ function constructor_overview()
             name = list_of_pairs_of_list_and_name[i][2]
             bad_atoms = [:password, :process, :log_file]
             fields = filter((x) -> !(x in bad_atoms), fieldnames(li[1]))
-            head = map(string, fields)
+            head = map((x) -> replace(ucfirst(string(x)), "_", " "), fields)
             text = construct_html_table_with_head(li, head, fields)
             insertion *= "<h2>$(name)</h2><p>"
             insertion *= text * "<p>"
