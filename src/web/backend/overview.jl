@@ -31,8 +31,8 @@ function construct_html_table_with_head(list, head, fields)::AbstractString
             elseif field == :task
                 instance = getfield(list[i], field)
                 text *= "<td>$(getfield(instance, :id))</td>"
-            elseif typeof(getfield(list[i], field)) == :DateTime
-                str = format(getfield(list[i], field), "y-m-dTH:M:S.s")
+            elseif typeof(getfield(list[i], field)) == DateTime
+                str = replace(string(getfield(list[i], field)), "T", " ")
                 text *= "<td>$(str)</td>"
             else
                 text *= "<td>$(getfield(list[i], field))</td>"
@@ -45,7 +45,7 @@ end
 
 function constructor_overview()
     html_doc = readlines(open("../src/web/frontend/overview.html"))
-    html_doc = join(html_doc, "\n")
+    html_doc = join(html_doc, "")
     html_parts = split(html_doc, "{}")
     if length(html_parts) != 2
         error("The html page has broken formatting.")

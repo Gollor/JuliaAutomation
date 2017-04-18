@@ -46,7 +46,7 @@ div.button {
 }
 
 div.content {
-    width: 360px;
+    width: 960px;
     height: 100%;
     margin: 0 auto;
     margin-top: -20px;
@@ -88,6 +88,7 @@ tr:nth-child(even) {
 
 <script>
 state = "day"
+$("tr:nth-child(even)").addClass("even");
 function myFunction()
 {
     if (state == "day")
@@ -95,8 +96,23 @@ function myFunction()
         document.querySelector("body").style.backgroundColor = "#21252B";
         document.querySelector("div.content").style.backgroundColor = "#282C34";
         document.querySelector("div.content").style.borderColor = "#3C424E";
-        document.querySelector("table").style.color = "#58AFDD";
-        document.querySelector("table").style.borderColor = "#3C424E";
+        th = document.querySelectorAll("th")
+        for (i = 0; i < th.length; i++)
+            th[i].style.borderColor = "#3C424E";
+        td = document.querySelectorAll("td")
+        for (i = 0; i < td.length; i++)
+            td[i].style.borderColor = "#3C424E";
+        heads = document.querySelectorAll("h2")
+        for (i = 0; i < heads.length; i++)
+            heads[i].style.color = "#58AFDD";
+        tables = document.querySelectorAll("table")
+        for (i = 0; i < tables.length; i++)
+        {
+            tables[i].style.color = "#58AFDD";
+            tables[i].style.borderColor = "#3C424E";
+        }
+        for (i = 0; i < $("tr:nth-child(even)").addClass("even").length; i++)
+        {$("tr:nth-child(even)").addClass("even")[i].style.backgroundColor="#2C323E";}
         document.querySelector("button").style.backgroundColor = "#58AFDD";
         state = "night";
     }
@@ -105,8 +121,23 @@ function myFunction()
         document.querySelector("body").style.backgroundColor = "#ffffff";
         document.querySelector("div.content").style.backgroundColor = "#f0f0ff";
         document.querySelector("div.content").style.borderColor = "#b0b0ff";
-        document.querySelector("table").style.color = "#ffffff";
-        document.querySelector("table").style.borderColor = "#b0b0ff";
+        th = document.querySelectorAll("th")
+        for (i = 0; i < th.length; i++)
+            th[i].style.borderColor = "#b0b0ff";
+        td = document.querySelectorAll("td")
+        for (i = 0; i < td.length; i++)
+            td[i].style.borderColor = "#b0b0ff";
+        heads = document.querySelectorAll("h2")
+        for (i = 0; i < heads.length; i++)
+            heads[i].style.color = "#000000";
+        tables = document.querySelectorAll("table")
+        for (i = 0; i < tables.length; i++)
+        {
+            tables[i].style.color = "#000000";
+            tables[i].style.borderColor = "#b0b0ff";
+        }
+        for (i = 0; i < $("tr:nth-child(even)").addClass("even").length; i++)
+        {$("tr:nth-child(even)").addClass("even")[i].style.backgroundColor="#e0e0ff";}
         document.querySelector("button").style.backgroundColor = "#5BC0DE";
         state = "day";
     }
