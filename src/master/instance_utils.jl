@@ -42,7 +42,7 @@ function get_log!(call::Call_info)::Call_info
     text = readstring((`sshpass -p $(inst.password) ssh $(inst.userhost)
                         "cat ~/julia_temp/$(file)"`))
     state = length(text)
-    to_write = text[call.log_pos:state]
+    to_write = text[max(call.log_pos,1):state]
     call.log_pos = state
     if length(to_write) > 1
         write(call.log_file, text)
