@@ -129,7 +129,8 @@ function construct_life_iteration(instance_error_limit,
                              "incremented due to call fail.")
                         call.instance.error_counter += 1
                     end
-                    try kill_python3(call.instance) end
+                    kill_python3(call.instance)
+                    kill_python3(call.instance)
                     call.instance.status = "OK"
                     if call.instance.error_counter >= instance_error_limit
                         call.instance.status = "ERROR"
@@ -137,32 +138,7 @@ function construct_life_iteration(instance_error_limit,
                 end
             end
         end
-        println("")
         println("Iteration $iteration:")
-        println("Instances:")
-        for instance in instances
-            println(instance)
-        end
-        println("Calls:")
-        for call in calls
-            if call.active == true
-                println(call)
-            end
-        end
-        println("Query:")
-        for task in query
-            print(task.id, " ")
-        end
-        println("")
-        println("Completed:")
-        for task in completed
-            println(task)
-        end
-        println("")
-        println("Process table:")
-        for key in keys(process_table)
-            println(key, ": ", process_table[key])
-        end
         iteration += 1
     end
     return life_iteration

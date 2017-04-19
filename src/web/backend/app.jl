@@ -22,7 +22,7 @@ function start_app()
         get("/", OverviewController, overview)
     end
 
-    Bukdu.start(8080)
+    Bukdu.start(8080, "0.0.0.0")
 end
 
 end # module

@@ -1,6 +1,6 @@
 module Instance_utils
 
-export check_status, get_log!, call!, update_logs!
+export check_status, get_log!, call!, update_logs!, kill_python3
 
 using Instance.Monitoring
 using Master.Types
@@ -85,6 +85,17 @@ function update_logs!(calls::Array{Call_info,1})
         if pos_after > pos_before
             call.log_last_update = now()
         end
+    end
+end
+
+function kill_python3(instance::Instance_info)
+    userhost = instance.userhost
+    password = instance.password
+    try
+        run(`sshpass -p $password ssh $userhost "pkill -9 python3"`)
+        return 1
+    catch
+        return 0
     end
 end
 
