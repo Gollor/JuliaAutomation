@@ -20,11 +20,25 @@ html {
 body {
     height: 100%;
     background-color: #ffffff;
+    color: #000000
 }
 
 h2 {
     margin-top: 20px;
     margin-left: 50px;
+    line-height: 160%;
+}
+
+h3 {
+    margin-top: 15px;
+    margin-left: 60px;
+    line-height: 140%;
+}
+
+h4 {
+    margin-top: 10px;
+    margin-left: 65px;
+    line-height: 120%;
 }
 
 div.button {
@@ -47,14 +61,10 @@ div.button {
 
 div.content {
     width: 960px;
-    height: 100%;
+    height: 280px;
     margin: 0 auto;
-    margin-top: -20px;
+    margin-top: 120px;
     background-color: #f0f0ff;
-    min-height: 100%;
-    height: auto !important;
-    height: 100%;
-    border: 1px solid #b0b0ff;
 }
 
 table {
@@ -81,7 +91,17 @@ tr:nth-child(even) {
 
 <br />
 
-{}
+<h2>Enter the command to create a new task:</h2>
+<h4>
+<form action="/create_task" style="width: 800px;">
+  Cmd:<br />
+  <input type="text" name="cmd" value="python3 file_to_run.py" style="margin-top: 10px; width: 100%;">
+  <br />
+  <input type="submit" name="button" value="Submit" style="margin-top: 10px">
+  <input type="submit" name="button" value="Return" style="margin-top: 10px; float: right;">
+</form>
+</h4>
+
 
 </div>
 </body>
@@ -108,7 +128,11 @@ function refreshStyle()
         document.querySelector("body").style.backgroundColor = "#21252B";
         document.querySelector("body").style.color = "#58AFDD";
         document.querySelector("div.content").style.backgroundColor = "#282C34";
-        document.querySelector("div.content").style.borderColor = "#3C424E";
+        document.querySelector("div.content").style.borderColor = "#5BC0DE";
+        input = document.querySelectorAll("input")
+        for (i = 0; i < input.length; i++) {
+            input[i].style.backgroundColor = "#2C323E";
+            input[i].style.borderColor = "#8BD0EE"; }
         th = document.querySelectorAll("th")
         for (i = 0; i < th.length; i++)
             th[i].style.borderColor = "#3C424E";
@@ -128,12 +152,16 @@ function refreshStyle()
         {$("tr:nth-child(even)").addClass("even")[i].style.backgroundColor="#2C323E";}
         document.querySelector("button").style.backgroundColor = "#58AFDD";
     }
-    else
+    else // if "day"
     {
         document.querySelector("body").style.backgroundColor = "#ffffff";
         document.querySelector("body").style.color = "#000000";
         document.querySelector("div.content").style.backgroundColor = "#f0f0ff";
         document.querySelector("div.content").style.borderColor = "#b0b0ff";
+        input = document.querySelectorAll("input")
+        for (i = 0; i < input.length; i++) {
+            input[i].style.backgroundColor = "#e0e0ff";
+            input[i].style.borderColor = "#8BD0EE"; }
         th = document.querySelectorAll("th")
         for (i = 0; i < th.length; i++)
             th[i].style.borderColor = "#b0b0ff";

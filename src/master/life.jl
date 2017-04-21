@@ -60,6 +60,7 @@ function construct_life_iteration(instance_error_limit,
                     gpu_state = 1
                     if gpu_state == 1 && length(query) > 0
                         request = pop!(query)
+                        kill_python3(instance)
                         call!(calls, request, instance)
                         instance.status = "BUSY"
                     else
@@ -91,29 +92,24 @@ function construct_life_iteration(instance_error_limit,
                         call.log_last_update = now()
                     end
                     if (now() - call.log_start).value > process_runtime
-                        info("Call runtime reached the time limit:")
+                        info("Call runtime reached the time limit.")
                         error("Call runtime reached the time limit.")
                     end
                     if (now() - call.log_last_update).value >logs_update_timeout
-                        info("Call failed to update the logs in time:")
+                        info("Call failed to update the logs in time.")
                         error("Call failed to update the logs in time.")
                     end
                     if call.process.termsignal >= 0
-                        info("Call exited:")
+                        info("Call exited.")
                         error("Call exited.")
                     end
-                    try
-                        logfile = open(string(split(
-                            split(string(call.log_file), ' ')[2], '>')[1]))
-                        log_is_fine = startswith(readlines(logfile)[end],
-                                                 "Training finished.")
-                        if log_is_fine
-                            info("Logs showed that the call was finished:")
-                            error("Logs showed that the call was finished:")
-                        end
-                    catch e
-                        print("Failed to check logs at runtime.")
-                        print(e)
+                    logfile = open(string(split(
+                        split(string(call.log_file), ' ')[2], '>')[1]))
+                    log_is_fine = startswith(readlines(logfile)[end],
+                                             "Training finished.")
+                    if log_is_fine
+                        info("Logs showed that the call was finished.")
+                        error("Logs showed that the call was finished.")
                     end
                 catch e
                     println(e)
