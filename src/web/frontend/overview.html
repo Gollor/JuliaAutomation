@@ -77,7 +77,7 @@ tr:nth-child(even) {
 <body>
 <div class="content">
 <br />
-<button type="button" onclick="myFunction();" class="btn btn-info btn-circle"><i class="glyphicon glyphicon-eye-open"></i></button>
+<button type="button" onclick="pressStyleButton();" class="btn btn-info btn-circle"><i class="glyphicon glyphicon-eye-open"></i></button>
 
 <br />
 
@@ -87,11 +87,23 @@ tr:nth-child(even) {
 </body>
 
 <script>
-state = "day"
-$("tr:nth-child(even)").addClass("even");
-function myFunction()
+
+if (localStorage.getItem("state") == null)
 {
-    if (state == "day")
+	localStorage.setItem("state", "day");
+}
+$("tr:nth-child(even)").addClass("even");
+function pressStyleButton()
+{
+    if (localStorage.getItem("state") == "day")
+		localStorage.setItem("state", "night");
+	else
+		localStorage.setItem("state", "day");
+	refreshStyle();
+}
+function refreshStyle()
+{
+    if (localStorage.getItem("state") == "day")
     {
         document.querySelector("body").style.backgroundColor = "#21252B";
         document.querySelector("div.content").style.backgroundColor = "#282C34";
@@ -114,7 +126,6 @@ function myFunction()
         for (i = 0; i < $("tr:nth-child(even)").addClass("even").length; i++)
         {$("tr:nth-child(even)").addClass("even")[i].style.backgroundColor="#2C323E";}
         document.querySelector("button").style.backgroundColor = "#58AFDD";
-        state = "night";
     }
     else
     {
@@ -139,9 +150,9 @@ function myFunction()
         for (i = 0; i < $("tr:nth-child(even)").addClass("even").length; i++)
         {$("tr:nth-child(even)").addClass("even")[i].style.backgroundColor="#e0e0ff";}
         document.querySelector("button").style.backgroundColor = "#5BC0DE";
-        state = "day";
     }
 }
+refreshStyle();
 
 </script>
 </html>

@@ -102,6 +102,19 @@ function construct_life_iteration(instance_error_limit,
                         info("Call exited:")
                         error("Call exited.")
                     end
+                    try
+                        logfile = open(string(split(
+                            split(string(call.log_file), ' ')[2], '>')[1]))
+                        log_is_fine = startswith(readlines(logfile)[end],
+                                                 "Training finished.")
+                        if log_is_fine
+                            info("Logs showed that the call was finished:")
+                            error("Logs showed that the call was finished:")
+                        end
+                    catch e
+                        print("Failed to check logs at runtime.")
+                        print(e)
+                    end
                 catch e
                     println(e)
                     call.active = false
