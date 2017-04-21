@@ -2,62 +2,17 @@
 <html>
 <head>
 
-<!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
-<!-- jQuery library -->
+<link rel="stylesheet" type="text/css" href="general.css">
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 
-<!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
+<script src="daystate.js"></script>
+
 <style>
-
-html {
-    height: 100%;
-}
-
-body {
-    height: 100%;
-    background-color: #ffffff;
-    color: #000000
-}
-
-h2 {
-    margin-top: 20px;
-    margin-left: 50px;
-    line-height: 160%;
-}
-
-h3 {
-    margin-top: 15px;
-    margin-left: 60px;
-    line-height: 140%;
-}
-
-h4 {
-    margin-top: 10px;
-    margin-left: 65px;
-    line-height: 120%;
-}
-
-div.button {
-    position: absolute;
-    right: 10px;
-    top: 5px;
-}
-
-.btn-circle {
-  width: 30px;
-  height: 30px;
-  text-align: center;
-  padding: 6px 0;
-  font-size: 12px;
-  line-height: 1.428571429;
-  border-radius: 15px;
-  float: right;
-  background-color: #5BC0DE;
-}
 
 div.content {
     width: 960px;
@@ -65,30 +20,17 @@ div.content {
     margin: 0 auto;
     margin-top: 120px;
     background-color: #f0f0ff;
-}
-
-table {
-    font-family: arial, sans-serif;
-    border-collapse: collapse;
-    width: 100%;
-}
-
-td, th {
     border: 1px solid #b0b0ff;
-    text-align: left;
-    padding: 8px;
 }
 
-tr:nth-child(even) {
-    background-color: #e0e0ff;
-}
 </style>
+
 </head>
 <body>
 <div class="content">
-<br />
 <button type="button" onclick="pressStyleButton();" class="btn btn-info btn-circle"><i class="glyphicon glyphicon-eye-open"></i></button>
 
+<br />
 <br />
 
 <h2>Enter the command to create a new task:</h2>
@@ -108,80 +50,6 @@ tr:nth-child(even) {
 
 <script>
 
-if (localStorage.getItem("state") == null)
-{
-	localStorage.setItem("state", "day");
-}
-$("tr:nth-child(even)").addClass("even");
-function pressStyleButton()
-{
-    if (localStorage.getItem("state") == "day")
-		localStorage.setItem("state", "night");
-	else
-		localStorage.setItem("state", "day");
-	refreshStyle();
-}
-function refreshStyle()
-{
-    if (localStorage.getItem("state") == "night")
-    {
-        document.querySelector("body").style.backgroundColor = "#21252B";
-        document.querySelector("body").style.color = "#58AFDD";
-        document.querySelector("div.content").style.backgroundColor = "#282C34";
-        document.querySelector("div.content").style.borderColor = "#5BC0DE";
-        input = document.querySelectorAll("input")
-        for (i = 0; i < input.length; i++) {
-            input[i].style.backgroundColor = "#2C323E";
-            input[i].style.borderColor = "#8BD0EE"; }
-        th = document.querySelectorAll("th")
-        for (i = 0; i < th.length; i++)
-            th[i].style.borderColor = "#3C424E";
-        td = document.querySelectorAll("td")
-        for (i = 0; i < td.length; i++)
-            td[i].style.borderColor = "#3C424E";
-        heads = document.querySelectorAll("h2")
-        for (i = 0; i < heads.length; i++)
-            heads[i].style.color = "#58AFDD";
-        tables = document.querySelectorAll("table")
-        for (i = 0; i < tables.length; i++)
-        {
-            tables[i].style.color = "#58AFDD";
-            tables[i].style.borderColor = "#3C424E";
-        }
-        for (i = 0; i < $("tr:nth-child(even)").addClass("even").length; i++)
-        {$("tr:nth-child(even)").addClass("even")[i].style.backgroundColor="#2C323E";}
-        document.querySelector("button").style.backgroundColor = "#58AFDD";
-    }
-    else // if "day"
-    {
-        document.querySelector("body").style.backgroundColor = "#ffffff";
-        document.querySelector("body").style.color = "#000000";
-        document.querySelector("div.content").style.backgroundColor = "#f0f0ff";
-        document.querySelector("div.content").style.borderColor = "#b0b0ff";
-        input = document.querySelectorAll("input")
-        for (i = 0; i < input.length; i++) {
-            input[i].style.backgroundColor = "#e0e0ff";
-            input[i].style.borderColor = "#8BD0EE"; }
-        th = document.querySelectorAll("th")
-        for (i = 0; i < th.length; i++)
-            th[i].style.borderColor = "#b0b0ff";
-        td = document.querySelectorAll("td")
-        for (i = 0; i < td.length; i++)
-            td[i].style.borderColor = "#b0b0ff";
-        heads = document.querySelectorAll("h2")
-        for (i = 0; i < heads.length; i++)
-            heads[i].style.color = "#000000";
-        tables = document.querySelectorAll("table")
-        for (i = 0; i < tables.length; i++)
-        {
-            tables[i].style.color = "#000000";
-            tables[i].style.borderColor = "#b0b0ff";
-        }
-        for (i = 0; i < $("tr:nth-child(even)").addClass("even").length; i++)
-        {$("tr:nth-child(even)").addClass("even")[i].style.backgroundColor="#e0e0ff";}
-        document.querySelector("button").style.backgroundColor = "#5BC0DE";
-    }
-}
 refreshStyle();
 
 </script>

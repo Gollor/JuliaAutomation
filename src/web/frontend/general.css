@@ -1,0 +1,61 @@
+html {
+    height: 100%;
+}
+
+body {
+    height: 100%;
+    background-color: #ffffff;
+    color: #000000
+}
+
+h2 {
+    margin-top: 20px;
+    margin-left: 50px;
+    line-height: 160%;
+}
+
+h3 {
+    margin-top: 15px;
+    margin-left: 60px;
+    line-height: 140%;
+}
+
+h4 {
+    margin-top: 10px;
+    margin-left: 65px;
+    line-height: 120%;
+}
+
+div.button {
+    position: absolute;
+    right: 10px;
+    top: 5px;
+}
+
+.btn-circle {
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  padding: 6px 0;
+  font-size: 12px;
+  line-height: 1.428571429;
+  border-radius: 15px;
+  float: right;
+  background-color: #5BC0DE;
+}
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #b0b0ff;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #e0e0ff;
+}
