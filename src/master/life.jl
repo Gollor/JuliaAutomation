@@ -67,7 +67,6 @@ function construct_life_iteration(instance_error_limit,
                         # It indicates it is occupied by the other program.
                         uh = instance.userhost
                         warn("Instance $(uh) is occupied by unknown force.")
-                        instance.error_counter += 1
                         instance.status = "OK"
                     end
                 catch e
