@@ -9,6 +9,13 @@ type OverviewController <: ApplicationController
     conn::Conn
 end
 
+function get_file(filename)
+    loaded_file = join(readlines(open("../src/web/frontend/$filename")), "")
+    function get_loaded_file(void)
+        return loaded_file
+    end
+end
+
 function start_app()
     overview_builder = constructor_overview()
     function overview(c::OverviewController)
@@ -20,6 +27,8 @@ function start_app()
 
     Router() do
         get("/", OverviewController, overview)
+        get("/daystate.js", OverviewController, get_file("daystate.js"))
+        get("/general.css", OverviewController, get_file("general.css"))
     end
 
     Bukdu.start(8080, getaddrinfo("0.0.0.0"))
