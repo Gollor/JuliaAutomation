@@ -27,8 +27,12 @@ function start_app()
 
     Router() do
         get("/", OverviewController, overview)
-        get("/daystate.js", OverviewController, get_file("daystate.js"))
-        get("/general.css", OverviewController, get_file("general.css"))
+    end
+
+    Endpoint() do
+        plug(Plug.Logger)
+        plug(Plug.Static, at="/static", from="../src/web/frontend/static")
+        plug(Router)
     end
 
     Bukdu.start(8080, getaddrinfo("0.0.0.0"))
